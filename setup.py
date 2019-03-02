@@ -1,7 +1,7 @@
 import multiprocessing
 from setuptools import setup
 
-setup(name='eve',
+setup(name='evepy',
     version='1.0',
     py_modules=['eve'],
     author='Munchii',
