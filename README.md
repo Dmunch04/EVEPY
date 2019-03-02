@@ -31,6 +31,6 @@ eve.save(result, 'example.eve')
 
 
 # ATOM grammar syntax highlighting
-1. Copy the folder: `atom` in the `editors` folder
+1. Copy the folder: `eve` in the `editors\atom` folder
 2. Paste that to the `.atom` folder in `C:\Users\yourusername\.atom\packages`
 3. Now restart ATOM and it should work
