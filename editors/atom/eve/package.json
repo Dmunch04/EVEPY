@@ -1,0 +1,17 @@
+{
+  "name": "language-eve",
+  "version": "0.0.1",
+  "description": "Eve programming language",
+  "engines": {
+    "atom": "*"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "license": "MIT"
+}

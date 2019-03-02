@@ -1,0 +1,6 @@
+'.source.eve':
+  'editor':
+    'commentStart': '??'
+    'increaseIndentPattern': '(?x)
+      ^ .* \\{ [^}"\']* $
+    '
