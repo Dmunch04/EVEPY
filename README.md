@@ -19,6 +19,7 @@ example.eve
 ];
 ```
 
+example.py
 ```python
 import eve
 
@@ -27,3 +28,9 @@ print(result['Name']) # And so on
 result['Age'] = '22'
 eve.save(result, 'example.eve')
 ```
+
+
+# ATOM grammar syntax highlighting
+1. Copy the folder: `atom` in the `editors` folder
+2. Paste that to the `.atom` folder in `C:\Users\yourusername\.atom\packages`
+3. Now restart ATOM and it should work
