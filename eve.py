@@ -235,15 +235,15 @@ def read (path):
 
                         # Check if the line starts with a '
                         elif temp.startswith("'"):   # This is a normal text var
-                            # Replace ' in the line to nothing
-                            line = line.replace("'", '')
-
                             # Split the line into words and symbols
                             elements = line.split()
 
+                            # Remove the '' around the parent/name
+                            parent = elements[0].replace("'", '')
+
                             try:
                                 # Try and set the result message
-                                res = ("'" + ' '.join(elements[2:]) + "'", elements[1], elements[0])
+                                res = (' '.join(elements[2:]), elements[1], parent)
                             except:
                                 # Line is empty
                                 continue
@@ -252,7 +252,7 @@ def read (path):
                             results.append(res)
 
                         # Check if the line starts with a ?
-                        ekif temp.startswith('$'):    # This is a definer
+                        elif temp.startswith('$'):    # This is a definer
                             # Replace ' and $ in the line to nothing
                             line = line.replace("'", '')
                             line = line.replace('$', '')
@@ -291,6 +291,8 @@ def save (content, path):
             if line[-1] == item:
                 # Then checks if the current value is not the same as the old value
                 if values[ip] != line[0]:
+                    print(values[ip])
+                    print(line[0])
                     # Creates a list for all the items in before
                     blist = [list(elem) for elem in before]
                     # Then assigns the value to the current value
