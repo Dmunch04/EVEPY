@@ -8,6 +8,10 @@
 #    But first make sure the first char in the list is '[', then find
 #    the closing ('];') and proceed!
 
+# Keywords for boolean and define functions
+boolwords = ['True', 'true', 'False', 'false']
+definewords = ['Define', 'define', 'Quit', 'quit']
+
 # The load function :: Loads the given file, and returns a dictionary with results
 def load (path):
     # Get the file contents and make it a list
@@ -82,10 +86,10 @@ def load (path):
                             # Split the line into words and symbols
                             elements = line.split()
 
-                            # Check if they're too many args
-                            if len(elements[2:]) > 2:
-                                # If so, print a message
-                                print('Too many args')
+                            # Checks if the bool keyword is valid
+                            if not ' '.join(elements[2:]) in boolwords:
+                                print('Unknown bool answer')
+                                continue
 
                             try:
                                 # Try and set the result message
@@ -99,16 +103,35 @@ def load (path):
 
                         # Check if the line starts with a '
                         elif temp.startswith("'"):   # This is a normal text var
-                            # Replace ' in the line to nothing
+                            # Split the line into words and symbols
+                            elements = line.split()
+
+                            # Remove the '' around the parent/name
+                            parent = elements[0].replace("'", '')
+
+                            try:
+                                # Try and set the result message
+                                res = (' '.join(elements[2:]), elements[1], parent)
+                            except:
+                                # Line is empty
+                                continue
+
+                            # Add the result text to the results list
+                            results.append(res)
+
+                        # Check if the line starts with a ?
+                        elif temp.startswith('$'):  # This is a definer
+                            # Replace ' and $ in the line to nothing
                             line = line.replace("'", '')
+                            line = line.replace('$', '')
 
                             # Split the line into words and symbols
                             elements = line.split()
 
-                            # Check if they're too many args
-                            if len(elements[2:]) > 2:
-                                # If so, print a message
-                                print('Too many args')
+                            # Checks if the definer keyword is valid
+                            if not elements[0] in definewords:
+                                print('Unknown define keyword')
+                                continue
 
                             try:
                                 # Try and set the result message
@@ -200,11 +223,6 @@ def read (path):
                             # Split the line into words and symbols
                             elements = line.split()
 
-                            # Check if they're too many args
-                            if len(elements[2:]) > 2:
-                                # If so, print a message
-                                print('Too many args')
-
                             try:
                                 # Try and set the result message
                                 res = (' '.join(elements[2:]), elements[1], elements[0])
@@ -223,14 +241,28 @@ def read (path):
                             # Split the line into words and symbols
                             elements = line.split()
 
-                            # Check if they're too many args
-                            if len(elements[2:]) > 2:
-                                # If so, print a message
-                                print('Too many args')
-
                             try:
                                 # Try and set the result message
                                 res = ("'" + ' '.join(elements[2:]) + "'", elements[1], elements[0])
+                            except:
+                                # Line is empty
+                                continue
+
+                            # Add the result text to the results list
+                            results.append(res)
+
+                        # Check if the line starts with a ?
+                        ekif temp.startswith('$'):    # This is a definer
+                            # Replace ' and $ in the line to nothing
+                            line = line.replace("'", '')
+                            line = line.replace('$', '')
+
+                            # Split the line into words and symbols
+                            elements = line.split()
+
+                            try:
+                                # Try and set the result message
+                                res = (' '.join(elements[2:]), elements[1], elements[0])
                             except:
                                 # Line is empty
                                 continue
