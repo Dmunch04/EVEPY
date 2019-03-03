@@ -17,6 +17,13 @@ pip install evepy
 Another way is to clone the repo and import the python file (`eve.py`)
 If none of them, you can also put the GitHub URL in your `requirements.txt` file (https://pip.pypa.io/en/stable/user_guide/#requirements-files)
 
+### Upgrading Version
+
+You can upgrade Eve with the following pip command:
+```
+pip install evepy -U
+```
+
 ### Strict Grammer Rules
 
 EVE currently have very strict grammar rules, to avoid errors. Please follow them:
