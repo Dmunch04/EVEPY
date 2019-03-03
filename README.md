@@ -22,7 +22,7 @@ If none of them, you can also put the GitHub URL in your `requirements.txt` file
 EVE currently have very strict grammar rules, to avoid errors. Please follow them:
 
 1. Make a new line for every variable - Don't have mutliple on one line
-2. Make sure the name of text variables have quotes around it - The **::** variables
+2. Make sure the name of text variables have quotes around it - Ex: `'Parent/Name' :: 5`, not `Parent/Name = 5`
 3. Make sure to have a **;** after the end bracket
 4. Make sure to have spaces between parents, operators and values - Ex: `'Parent' :: 'Value'`, not `'Parent'::'Value'`. The same thing for other functions
 5. Make sure to have the right define symbols in front - Ex: `$Define = 'Method'`, not `Define = 'Method'`
