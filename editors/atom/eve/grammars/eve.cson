@@ -3,12 +3,6 @@
 'fileTypes': ['eve', 'eee']
 
 'patterns': [
-  #{
-    #'begin': '\''
-    #'end': '\''
-    #'name': 'string.quoted.single.eve'
-  #},
-
   {
     'name': 'meta.section.eve'
     'contentName': 'markup.other.section.eve'
@@ -20,7 +14,7 @@
     'end': '(\\])'
     'endCaptures':
       0: 'punctuation.definition.end.eve'
-      1: 'name': 'support.function.section.eve'   
+      1: 'name': 'support.function.section.eve'
     'patterns': [
       {
         'include': '#comment_line'
@@ -60,7 +54,15 @@
 
       {
         'include': '#boolans'
-      }
+      },
+
+      {
+        'include': '#definer'
+      },
+
+      {
+        'include': '#types'
+      },
 
       {
         'include': '#eof'
@@ -249,4 +251,33 @@ repository:
     {
       'match': '\\b(True|true|False|false)\\b'
       'name': 'keyword.control.eve'
+    }
+  keywords:
+    {
+      'match': '\\b(Define|define|Quit|quit)\\b'
+      'name': 'constant.numeric.eve'
+    }
+  types:
+    {
+      'match': '\\b(None|none|Off|off|On|on)\\b'
+      'name': 'entity.name.type.class.eve'
+    }
+  definer:
+    {
+      'begin': '\\$'
+      'end': '\n'
+      'name': 'keyword.control.eve'
+      'patterns': [
+        {
+          'include': '#keywords'
+        },
+
+        {
+          'include': '#string'
+        },
+
+        {
+          'include': '#equal'
+        }
+      ]
     }
