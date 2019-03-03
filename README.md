@@ -59,7 +59,7 @@ example.eve
 example.py
 
 ```python
-import evepy as eve
+import eve
 
 result = eve.load('example.eve')
 print(result['Name'])
