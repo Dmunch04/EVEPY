@@ -255,7 +255,7 @@ repository:
   keywords:
     {
       'match': '\\b(Define|define|Quit|quit)\\b'
-      'name': 'constant.numeric.eve'
+      'name': 'entity.name.function.eve'
     }
   types:
     {
