@@ -8,9 +8,15 @@
 #    But first make sure the first char in the list is '[', then find
 #    the closing ('];') and proceed!
 
+# Imports
+import os
+
 # Keywords for boolean and define functions
 boolwords = ['True', 'true', 'False', 'false']
 definewords = ['Define', 'define', 'Quit', 'quit']
+
+# Templaes for creating files
+template_default = "[\n  'Line1' :: 'Element1'\n];" # Maybe make the templates lists
 
 # The load function :: Loads the given file, and returns a dictionary with results
 def load (path):
@@ -148,7 +154,10 @@ def load (path):
 
                     #print(results)
                     return results
-
+                
+        else:
+            print('[Error -> 1] Missing open bracket'
+        
 # The read function :: Should only be used for EVE development, or experienced EVE developers!
 def read (path):
     # Gets the file contents and makes it to a list
@@ -291,8 +300,6 @@ def save (content, path):
             if line[-1] == item:
                 # Then checks if the current value is not the same as the old value
                 if values[ip] != line[0]:
-                    print(values[ip])
-                    print(line[0])
                     # Creates a list for all the items in before
                     blist = [list(elem) for elem in before]
                     # Then assigns the value to the current value
@@ -348,4 +355,18 @@ def save (content, path):
         # Writes that line to the file
         file.write(line)
     # Closes the file
+    file.close()
+
+def create (template = '', path):
+    if(os.path.isfile(path)):
+        print('[Error -> 5] File already exists')
+        return
+    
+    content = ''
+    
+    if template == 'default':
+        content = template_default
+    
+    file = open(path, 'w+')
+    file.write(content)
     file.close()
