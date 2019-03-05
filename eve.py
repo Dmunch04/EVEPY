@@ -11,12 +11,21 @@
 # Imports
 import os
 
+# Lists for checking
+numbers = '0123456789'
+
 # Keywords for boolean and define functions
 boolwords = ['True', 'true', 'False', 'false']
 definewords = ['Define', 'define', 'Quit', 'quit']
 
-# Templaes for creating files
-template_default = "[\n  'Line1' :: 'Element1'\n];" # Maybe make the templates lists
+# File templates
+template_default = "[\n\n  $Define = None\n\n  'Line1' :: 'Element1'\n\n  $Quit = Off\n\n];"
+
+# Defining words
+keywords = ['string', 'float', 'int']
+stringwords = ['upper', 'lower', 'spaces']
+floatwords = ['round']
+intwords = ['add', 'subtract', 'multiply', 'divide']
 
 # The load function :: Loads the given file, and returns a dictionary with results
 def load (path):
@@ -73,6 +82,148 @@ def load (path):
                         elif temp == '':
                             # Ignore it/go to next line
                             continue
+
+                        # Checks if the current line starts with {
+                        elif temp.startswith('{'):
+                            # If so, then loops through all lines from that line
+                            for identifer, definer in enumerate(content[i : ]):
+                                # Then checks if the current line's last char is }
+                                if definer[-1:] == '}':
+                                    # Creates the string variable define
+                                    define = ''
+                                    # Sets the define variable to definer but with replaced chars
+                                    define = definer.replace(' ', '')
+                                    define = define.replace('{', '')
+                                    define = define.replace('}', '')
+                                    define = define.replace('\n', '')
+                                    define = define.replace('.', ' ')
+                                    define = define.split(' ')
+
+                                    # Creates a list called value that splits the content on spaces
+                                    values = content[i + 1].split(' ')
+                                    # Creates a string variable called value that's assigned to the
+                                    # values list from fourth element and up
+                                    value = ' '.join(values[4:])
+
+                                    # Creates and empty list called result
+                                    result = []
+                                    # Appends the first four elements from the values list
+                                    result.append(values[0:4])
+
+                                    # --- TODO: Make comments ---
+
+                                    # Checks if the first word inside the {} is a keyword
+                                    if define[0].lower() in keywords:
+                                        # If so, then checks if the second (after dot) is in string words
+                                        if define[1].lower() in stringwords:
+                                            # Checks if the second word is equal to lower
+                                            if define[1].lower() == 'lower':
+                                                # If so, then sets the value to lowercase
+                                                value = value.lower()
+                                            # Checks if the second word is equal to upper
+                                            elif define[1].lower() == 'upper':
+                                                # If so, then sets the value to uppercase
+                                                value = value.upper()
+                                            # Checks if the second word is equal to spaces
+                                            elif define[1].lower() == 'spaces':
+                                                # If so, then replaces the ' in the value
+                                                val = value.replace("'", '')
+                                                # Makes the lst variable to a list
+                                                lst = list(val)
+                                                # Then sets the value to the lst seperated with a ,
+                                                value = ', '.join(lst)
+
+                                        # If it's not in string words, then checks if it's in float words
+                                        elif define[1].lower() in floatwords:
+                                            # If so, then checks if the second word is equal to round
+                                            if define[1].lower() == 'round':
+                                                # If so, then sets the value variable to the value rounded
+                                                value = str(round(float(value)))
+
+                                        # If it's not in float words, then checks if it's in int words
+                                        elif define[1].lower() in intwords:
+                                            # If so, then checks if the second word is equal to add
+                                            if define[1].lower() == 'add':
+                                                nums = []
+                                                vals = value.split('+')
+
+                                                for val in vals:
+                                                    val = val.replace(' ', '')
+                                                    for num in val:
+                                                        if not num in numbers:
+                                                            continue
+
+                                                    nums.append(int(val))
+
+                                                value = str(sum(nums))
+                                            # If so, then checks if the second word is equal to subtract
+                                            elif define[1].lower() == 'subtract':
+                                                nums = []
+                                                vals = value.split('-')
+                                                sub_from = None
+
+                                                for val in vals:
+                                                    val = val.replace(' ', '')
+                                                    for num in val:
+                                                        if not num in numbers:
+                                                            continue
+
+                                                    nums.append(int(val))
+
+                                                for num in nums:
+                                                    if sub_from is None:
+                                                        sub_from = num
+                                                    else:
+                                                        sub_from -= num
+
+                                                value = str(sub_from)
+                                            # If so, then checks if the second word is equal to multiply
+                                            elif define[1].lower() == 'multiply':
+                                                nums = []
+                                                vals = value.split('*')
+                                                mul_from = None
+
+                                                for val in vals:
+                                                    val = val.replace(' ', '')
+                                                    for num in val:
+                                                        if not num in numbers:
+                                                            continue
+
+                                                    nums.append(int(val))
+
+                                                for num in nums:
+                                                    if mul_from is None:
+                                                        mul_from = num
+                                                    else:
+                                                        mul_from *= num
+
+                                                value = str(mul_from)
+                                            # If so, then checks if the second word is equal to divide
+                                            elif define[1].lower() == 'divide':
+                                                nums = []
+                                                vals = value.split('/')
+                                                div_from = None
+
+                                                for val in vals:
+                                                    val = val.replace(' ', '')
+                                                    for num in val:
+                                                        if not num in numbers:
+                                                            continue
+
+                                                    nums.append(int(val))
+
+                                                for num in nums:
+                                                    if div_from is None:
+                                                        div_from = num
+                                                    else:
+                                                        div_from /= num
+
+                                                value = str(div_from)
+
+                                    # Adds the result value to the result list
+                                    result[0].append(value)
+                                    # Sets the next line of content to the result line
+                                    content[i + 1] = ' '.join(result[0])
 
                         # If the current line does not match any above,
                         # then add it to the insides list
@@ -154,10 +305,21 @@ def load (path):
 
                     #print(results)
                     return results
-                
-        else:
-            print('[Error -> 1] Missing open bracket'
-        
+
+            # This means that it doesn't have a ] or ;
+            else:
+                # Print an error
+                print('[Error -> 2] Missing closing tags')
+                # Then goes to the next lines
+                return
+
+    # This means that it doesn't have a [
+    else:
+        # Print an error
+        print('[Error -> 1] Missing open bracket')
+        # Then goes to the next lines
+        return
+
 # The read function :: Should only be used for EVE development, or experienced EVE developers!
 def read (path):
     # Gets the file contents and makes it to a list
@@ -282,6 +444,20 @@ def read (path):
                     # Returns the results
                     return results
 
+                # This means that it doesn't have a ] or ;
+                else:
+                    # Print an error
+                    print('[Error -> 2] Missing closing tags')
+                    # Then goes to the next lines
+                    continue
+
+        # This means that it doesn't have a [
+        else:
+            # Print an error
+            print('[Error -> 1] Missing open bracket')
+            # Then goes to the next lines
+            continue
+
 # The save function :: Saves the changed data to the given file
 def save (content, path):
     # Calls the read function to get the content of the old file
@@ -357,16 +533,38 @@ def save (content, path):
     # Closes the file
     file.close()
 
-def create (template = '', path):
-    if(os.path.isfile(path)):
-        print('[Error -> 5] File already exists')
+# The create function :: Creates a new file with the given filename and template
+def create (path, template = ''):
+    # Checks if the given path doesn't ends with .eve to make sure the file is an eve file
+    if not path.endswith('.eve'):
+        # If it doesn't ends with .eve, then add it to the path
+        path += '.eve'
+
+    # Checks if the directory does not exist
+    if not os.path.exists(path):
+        # If it doesn't exist, then print an error
+        print('[Error -> 3] Directory does not exist')
+        # Then returns out
         return
-    
+
+    # Checks if there's already a file with that name in the location
+    if os.path.isfile(path):
+        # If so, prints an error
+        print('[Error -> 4] File already exists')
+        # Then returns out
+        return
+
+    # Creates the text variable 'content' that will store the content
     content = ''
-    
-    if template == 'default':
+
+    # Checks if the given template is named default
+    if template.lower().strip() == 'default':
+        # If so, sets the content to that template
         content = template_default
-    
+
+    # Creates the file and opens it
     file = open(path, 'w+')
+    # Writes all the content to the file
     file.write(content)
+    # Closes the file
     file.close()
