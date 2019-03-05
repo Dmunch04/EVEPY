@@ -162,27 +162,12 @@ repository:
       'name': 'constant.numeric.eve'
       'patterns': [
         {
-          'include': '#string'
+          'include': 'text'
         },
 
         {
-          'include': '#identifier'
-        },
-
-        {
-          'include': '#var'
-        },
-
-        {
-          'include': '#equal'
-        },
-
-        {
-          'include': '#numeric'
-        },
-
-        {
-          'include': '#boolans'
+          'match': '.'
+          'name': 'entity.name.function.eve'
         }
       ]
     }
