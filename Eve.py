@@ -1,6 +1,6 @@
 import os
 
-from Helper import CheckValue, Keywords, OptionWords
+from _EveHelper import CheckValue, Keywords, OptionWords
 
 def load (_Path, *_Options):
     Load (_Path, _Options)

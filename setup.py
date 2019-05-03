@@ -6,8 +6,8 @@ with open ('README.md', 'r') as README:
 
 setup (
     name = 'evepy',
-    version = '2.5',
-    py_modules = ['Eve'],
+    version = '2.6',
+    py_modules = ['Eve', '_EveHelper'],
     author = 'Munchii',
     author_email = 'contact@munchii.me',
     license = 'MIT',
