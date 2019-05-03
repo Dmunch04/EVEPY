@@ -84,7 +84,7 @@ def Loads (_Data, *_Options):
                     Apply = ToApply.lower ().split ('.')
                     if Apply[0] in Keywords:
                         if Apply[1] in OptionWords[Apply[0]]:
-                            Value = f"'{OptionWords[Apply[0]][Apply[1]] (Value)}'"
+                            Value = f"{OptionWords[Apply[0]][Apply[1]] (Value)}"
                             ToApply = ''
 
                 Value = CheckValue (Value, CurrentSectionData)
