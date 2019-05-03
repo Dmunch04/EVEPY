@@ -77,10 +77,10 @@ Example.py
 import Eve
 
 # Load a file :: load(path)
-Data = Eve.Load ('example.eve')
+Data = Eve.Load ('Example.eve')
 
 # Print variables (Prints: Hello, World!)
-print (Result['String'])
+print (Result[0]['String'])
 ```
 
 <br>

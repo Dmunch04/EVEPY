@@ -3,10 +3,10 @@ import os
 from _EveHelper import CheckValue, Keywords, OptionWords
 
 def load (_Path, *_Options):
-    Load (_Path, _Options)
+    return Load (_Path, _Options)
 
 def loads (_Data, *_Options):
-    Loads (_Data, _Options)
+    return Loads (_Data, _Options)
 
 def Load (_Path, *_Options):
     with open (_Path, 'r') as File:
