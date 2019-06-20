@@ -70,10 +70,11 @@ Example.eve
   'IsGonnaUseEVE?' :: True
 ];
 ```
+
 <br>
 Example.py
 
-```python
+```py
 import Eve
 
 # Load a file :: load(path)
@@ -81,6 +82,30 @@ Data = Eve.Load ('Example.eve')
 
 # Print variables (Prints: Hello, World!)
 print (Result[0]['String'])
+```
+
+Parsing:
+```py
+import Eve
+
+Data = Eve.Parse (Eve.Load ('Test.eve'))
+
+print (dir (Data))
+
+"""
+If the file only has 1 section, you can access variables like this:
+print (Data.MyVar1)
+print (Data.MyVar2)
+print (Data.MyVar3)
+"""
+
+"""
+If the file contaions more than one section, you'll need to access them like this:
+print (Data.Section0.MyVar1)
+print (Data.Section0.MyVar2)
+print (Data.Section0.MyVar3)
+print (Data.Section1.MyVar4)
+"""
 ```
 
 <br>
