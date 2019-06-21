@@ -1,4 +1,5 @@
 from hashlib import md5
+from Eve.Helpers import Hasher
 
 Keywords = ['string', 'math', 'hash', 'list']
 OptionWords = {
@@ -13,7 +14,8 @@ OptionWords = {
     },
 
     'hash': {
-        'md5': lambda X: str (md5 (X.encode ()).hexdigest ())
+        'md5': lambda X: str (md5 (X.encode ()).hexdigest ()),
+        'mover': lambda X: str (Hasher.Move (X))
     },
 
     'list': {
