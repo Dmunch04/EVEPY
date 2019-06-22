@@ -1,14 +1,14 @@
-def dump (_Path, _Data, **_Options):
+def dump (_Path: str, _Data: dict, **_Options) -> None:
     return Dump (_Path, _Data **_Options)
 
-def dumps (_Data, **_Options):
+def dumps (_Data: str, **_Options) -> str:
     return Dumps (_Data, **_Options)
 
-def Dump (_Path, _Data, **_Options):
+def Dump (_Path: str, _Data: dict, **_Options) -> None:
     with open (_Path, 'w+') as File:
         File.write (Dumps (_Data))
 
-def Dumps (_Data, **_Options):
+def Dumps (_Data: str, **_Options) -> str:
     if not isinstance (_Data, list):
         _Data = [_Data]
 

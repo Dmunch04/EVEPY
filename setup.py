@@ -6,7 +6,7 @@ with open ('README.md', 'r') as README:
 
 setup (
     name = 'evepy',
-    version = '3.0',
+    version = '3.1',
     packages = ['Eve'],
     author = 'Munchii',
     author_email = 'contact@munchii.me',

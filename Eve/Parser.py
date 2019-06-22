@@ -1,5 +1,8 @@
 from Eve.Models import Object
 
+def parse (_Data) -> Object.EveObject:
+    return Parse (_Data)
+
 def Parse (_Data) -> Object.EveObject:
     EveData = Object.EveObject ()
 

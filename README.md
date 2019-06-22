@@ -1,4 +1,4 @@
-# EVE
+## EVE
 
 EVE is an lightweight data-interchange format.
 
@@ -15,10 +15,10 @@ These instructions will help you get started using EVE
 You can install it with pip (https://pypi.org/project/evepy/)
 
 ```
-pip install evepy
+  pip install evepy
 ```
 
-Another way is to clone the repo and import the python file (`Eve.py`)
+Another way is to clone the repo and import the Eve folder.
 If none of them, you can also put the GitHub URL in your `requirements.txt` file (https://pip.pypa.io/en/stable/user_guide/#requirements-files)
 
 <br>
@@ -28,7 +28,7 @@ If none of them, you can also put the GitHub URL in your `requirements.txt` file
 You can upgrade Eve with the following pip command:
 
 ```
-pip install evepy -U
+  pip install evepy -U
 ```
 
 <br>
@@ -39,98 +39,123 @@ Here are examples of how to use EVE
 
 Example.eve
 
-```
-[
-  @ Simple Stuff
-  'String' :: 'Hello, World!'     @ A simple string : Hello, World
-  'Int' :: 5                      @ A simple int    : 5
-  'Float' :: 6.9                  @ A simple float  : 6.9
-  'Bool' :: False                 @ A simple bool   : False
-  'List' :: ('a', 1, False)       @ A simple list   : ['a', 1, False]
+```eve
+  [
+    @ Simple Stuff
+    'String' :: 'Hello, World!'     @ A simple string : Hello, World
+    'Int' :: 5                      @ A simple int    : 5
+    'Float' :: 6.9                  @ A simple float  : 6.9
+    'Bool' :: False                 @ A simple bool   : False
+    'List' :: ('a', 1, False)       @ A simple list   : ['a', 1, False]
 
-  @ Advanced Stuff
-  {String.Upper}
-  'Advanced_String' :: 'Hello, World!'      @ An advanced string    : HELLO, WORLD!
-  {Math.Eval}
-  'Advanced_Math' :: (5 + 2) * 3            @ Doing math            : 21
-  {Math.Round}
-  'Advanced_Float' :: 6.9                   @ Float rounding        : 7
-  {Hash.MD5}
-  'Advanced_Hashing' :: 'Hello, World!'     @ Hashing strings       : 65a8e27d8879283831b664bd8b7f0ad4
-  {List.Lower}
-  'Advanced_List' :: ('A', 'B', 'C')        @ Changing list values  : ['a', 'b', 'c']
+    @ Advanced Stuff
+    {String.Upper}
+    'Advanced_String' :: 'Hello, World!'      @ An advanced string    : HELLO, WORLD!
+    {Math.Eval}
+    'Advanced_Math' :: (5 + 2) * 3            @ Doing math            : 21
+    {Math.Round}
+    'Advanced_Float' :: 6.9                   @ Float rounding        : 7
+    {Hash.MD5}
+    'Advanced_Hashing' :: 'Hello, World!'     @ Hashing strings       : 65a8e27d8879283831b664bd8b7f0ad4
+    {List.Lower}
+    'Advanced_List' :: ('A', 'B', 'C')        @ Changing list values  : ['a', 'b', 'c']
 
-  'Math_List' :: (10 + 10, (5 + 2) * 3)     @ Doing math in list    : [20, 21]
+    'Math_List' :: (10 + 10, (5 + 2) * 3)     @ Doing math in list    : [20, 21]
 
-  @ And much more!
-];
+    @ And much more!
+  ];
 
-[
-  @ Btw, you can have multiple sections.
-  'IsGonnaUseEVE?' :: True
-];
+  [
+    @ Btw, you can have multiple sections.
+    'IsGonnaUseEVE?' :: True
+  ];
 ```
 
 <br>
+
 Example.py
 
 ```py
-import Eve
+  import Eve
 
-# Load a file :: load(path)
-Data = Eve.Load ('Example.eve')
+  # Load a file :: load(path)
+  Data = Eve.Load ('Example.eve')
 
-# Print variables (Prints: Hello, World!)
-print (Result[0]['String'])
+  # Print variables (Prints: Hello, World!)
+  print (Result[0]['String'])
 ```
 
 Parsing:
 ```py
-import Eve
+  import Eve
 
-Data = Eve.Parse (Eve.Load ('Test.eve'))
+  Data = Eve.Parse (Eve.Load ('Test.eve'))
 
-print (dir (Data))
+  print (dir (Data))
 
-"""
-If the file only has 1 section, you can access variables like this:
-print (Data.MyVar1)
-print (Data.MyVar2)
-print (Data.MyVar3)
-"""
+  """
+  If the file only has 1 section, you can access variables like this:
+  print (Data.MyVar1)
+  print (Data.MyVar2)
+  print (Data.MyVar3)
+  """
 
-"""
-If the file contaions more than one section, you'll need to access them like this:
-print (Data.Section0.MyVar1)
-print (Data.Section0.MyVar2)
-print (Data.Section0.MyVar3)
-print (Data.Section1.MyVar4)
-"""
+  """
+  If the file contaions more than one section, you'll need to access them like this:
+  print (Data.Section0.MyVar1)
+  print (Data.Section0.MyVar2)
+  print (Data.Section0.MyVar3)
+  print (Data.Section1.MyVar4)
+  """
 ```
 
 <br>
 
 ### ATOM grammar syntax highlighting
 
-You can find the syntax file which is named: `EVE.cson`
+You can find the syntax file which is named: `EVE.cson`, which is located in the [grammars folder](grammars).
 
 <br>
 
 ## Methods
-### Load Method
+### Load Method (Alias: `load`)
 
-The load method takes in a path to an eve file, and returns the content
-
-```
-Load (Path)
-```
-
-### Loads Method
-
-The loads method takes in EVE data and returns a dict of the content
+The load method takes in a path to an Eve file, and returns the content.
 
 ```
-Loads (Data)
+  Load (Path)
+```
+
+### Loads Method (Alias: `loads`)
+
+The loads method takes in an Eve data string and returns a dict of the content.
+
+```
+  Loads (Data)
+```
+
+### Dump Method (Alias: `dump`)
+
+The dump method takes in a path and a dict of data, and then transforms the dict into Eve code and writes it to the file at the path.
+
+```
+  Dump (Path, Data)
+```
+
+### Dumps Method (Alias: `dumps`)
+
+The dumps method takes in a dict of data and returns a string of Eve data.
+
+```
+  Dumps (Data)
+```
+
+### Parse Method (Alias: `parse`)
+
+The Parse method takes in a dict of content and returns a `EveObject` class with the dict's keys as attributes, and their value to them.
+
+```
+  Parse (Data)
 ```
 
 <br>
@@ -149,26 +174,27 @@ Supported definers:
   - Round   : Rounds up a float to nearest 1
 - Hash
   - MD5     : Hashes the variable value with MD5
+  - Mover   : Moves every character in the string 3 characters up the alphabet
 - List
   - Upper   : Makes all string values in the list uppercase
   - Lower   : Makes all string values in the list lowercase
 
 Examples:
 
-```
-[
-  @ This here will always make the string uppercase (Return: 'MARTIN')
-  {String.Upper}
-  'Name' :: 'martin'
+```eve
+  [
+    @ This here will always make the string uppercase (Return: 'MARTIN')
+    {String.Upper}
+    'Name' :: 'martin'
 
-  @ This here will add the numbers (Return: 7)
-  {Math.Eval}
-  'Number' :: 5 + 2
+    @ This here will add the numbers (Return: 7)
+    {Math.Eval}
+    'Number' :: 5 + 2
 
-  @ This will round up the float (Return: 7)
-  {Math.Round}
-  'Float' :: 6.7
-];
+    @ This will round up the float (Return: 7)
+    {Math.Round}
+    'Float' :: 6.7
+  ];
 ```
 
 <br>
@@ -178,9 +204,13 @@ Examples:
 Feel free to make a pull request, so you can help create Eve!
 And also feel free to create Eve in other languages!
 
+<br>
+
 ## Authors
 
-* **Dmunch04** - **Initial Work** - [EVE] (https://github.com/Dmunch04)
+* **Dmunch04** - **Initial Work** - [EVE](https://github.com/Dmunch04)
+
+<br>
 
 ## License
 

@@ -2,17 +2,17 @@ import os
 
 from Eve.Helpers.Helper import CheckValue, Keywords, OptionWords
 
-def load (_Path, **_Options):
+def load (_Path: str, **_Options) -> dict:
     return Load (_Path, **_Options)
 
-def loads (_Data, **_Options):
+def loads (_Data: str, **_Options) -> dict:
     return Loads (_Data, **_Options)
 
-def Load (_Path, **_Options):
+def Load (_Path: str, **_Options) -> dict:
     with open (_Path, 'r') as File:
         return Loads (File.read (), **_Options)
 
-def Loads (_Data, **_Options):
+def Loads (_Data: str, **_Options) -> dict:
     if isinstance (_Data, str):
         Data = _Data.split ('\n')
 
