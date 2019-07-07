@@ -1,162 +1,26 @@
 ## EVE
 
-EVE is an lightweight data-interchange format.
+EVE is an lightweight data-interchange format. This repo contains the EVE library for a lot of languages (Hopefully will soon). This means that if you want to contribute, then you need to follow the exact EVE syntax of how it should work.
 
 <br>
 
-### Getting Started
+### ToDo
 
-These instructions will help you get started using EVE
+This is the global ToDo list for EVE
 
-<br>
-
-### Installing
-
-You can install it with pip (https://pypi.org/project/evepy/)
-
-```
-  pip install evepy
-```
-
-Another way is to clone the repo and import the Eve folder.
-If none of them, you can also put the GitHub URL in your `requirements.txt` file (https://pip.pypa.io/en/stable/user_guide/#requirements-files)
+- Make it be able to handle one-liners (Find something to split the variables)
 
 <br>
 
-### Upgrading Version
+### Example
 
-You can upgrade Eve with the following pip command:
-
-```
-  pip install evepy -U
-```
-
-<br>
-
-### Example use
-
-Here are examples of how to use EVE
-
-Example.eve
-
-```eve
-  [
-    @ Simple Stuff
-    'String' :: 'Hello, World!'     @ A simple string : Hello, World
-    'Int' :: 5                      @ A simple int    : 5
-    'Float' :: 6.9                  @ A simple float  : 6.9
-    'Bool' :: False                 @ A simple bool   : False
-    'List' :: ('a', 1, False)       @ A simple list   : ['a', 1, False]
-
-    @ Advanced Stuff
-    {String.Upper}
-    'Advanced_String' :: 'Hello, World!'      @ An advanced string    : HELLO, WORLD!
-    {Math.Eval}
-    'Advanced_Math' :: (5 + 2) * 3            @ Doing math            : 21
-    {Math.Round}
-    'Advanced_Float' :: 6.9                   @ Float rounding        : 7
-    {Hash.MD5}
-    'Advanced_Hashing' :: 'Hello, World!'     @ Hashing strings       : 65a8e27d8879283831b664bd8b7f0ad4
-    {List.Lower}
-    'Advanced_List' :: ('A', 'B', 'C')        @ Changing list values  : ['a', 'b', 'c']
-
-    'Math_List' :: (10 + 10, (5 + 2) * 3)     @ Doing math in list    : [20, 21]
-
-    @ And much more!
-  ];
-
-  [
-    @ Btw, you can have multiple sections.
-    'IsGonnaUseEVE?' :: True
-  ];
-```
-
-<br>
-
-Example.py
-
-```py
-  import Eve
-
-  # Load a file :: load(path)
-  Data = Eve.Load ('Example.eve')
-
-  # Print variables (Prints: Hello, World!)
-  print (Result[0]['String'])
-```
-
-Parsing:
-```py
-  import Eve
-
-  Data = Eve.Parse (Eve.Load ('Test.eve'))
-
-  print (dir (Data))
-
-  """
-  If the file only has 1 section, you can access variables like this:
-  print (Data.MyVar1)
-  print (Data.MyVar2)
-  print (Data.MyVar3)
-  """
-
-  """
-  If the file contaions more than one section, you'll need to access them like this:
-  print (Data.Section0.MyVar1)
-  print (Data.Section0.MyVar2)
-  print (Data.Section0.MyVar3)
-  print (Data.Section1.MyVar4)
-  """
-```
+You can find a good example of how EVE looks, in the [example file](/Examples/Example.eve)
 
 <br>
 
 ### ATOM grammar syntax highlighting
 
 You can find the syntax file which is named: `EVE.cson`, which is located in the [grammars folder](grammars).
-
-<br>
-
-## Methods
-### Load Method (Alias: `load`)
-
-The load method takes in a path to an Eve file, and returns the content.
-
-```
-  Load (Path)
-```
-
-### Loads Method (Alias: `loads`)
-
-The loads method takes in an Eve data string and returns a dict of the content.
-
-```
-  Loads (Data)
-```
-
-### Dump Method (Alias: `dump`)
-
-The dump method takes in a path and a dict of data, and then transforms the dict into Eve code and writes it to the file at the path.
-
-```
-  Dump (Path, Data)
-```
-
-### Dumps Method (Alias: `dumps`)
-
-The dumps method takes in a dict of data and returns a string of Eve data.
-
-```
-  Dumps (Data)
-```
-
-### Parse Method (Alias: `parse`)
-
-The Parse method takes in a dict of content and returns a `EveObject` class with the dict's keys as attributes, and their value to them.
-
-```
-  Parse (Data)
-```
 
 <br>
 
@@ -201,14 +65,13 @@ Examples:
 
 ## Contribute
 
-Feel free to make a pull request, so you can help create Eve!
-And also feel free to create Eve in other languages!
+If you wanna create an EVE library in another language, or optimize an already existing library, then fork this repo and make a pull request. Do note that the library should follow the exact EVE syntax/way of working. You should add a new language the same way, as the Python one is added!
 
 <br>
 
 ## Authors
 
-* **Dmunch04** - **Initial Work** - [EVE](https://github.com/Dmunch04)
+- [Dmunch04](https://github.com/Dmunch04) - Initial Work & Python Version
 
 <br>
 

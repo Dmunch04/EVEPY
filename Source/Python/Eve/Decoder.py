@@ -36,10 +36,10 @@ def Loads (_Data: str, **_Options) -> dict:
         if FixedLine.startswith ('@'):
             continue
 
-        if FixedLine == '[' and StartFound == False and EndFound == False:
+        if FixedLine.startswith ('[') and not (StartFound and EndFound):
             StartFound = True
 
-        elif FixedLine == '];' and StartFound == True and EndFound == False:
+        elif FixedLine.endswith ('];') and StartFound and not EndFound:
             EndFound = True
 
         if StartFound and EndFound:
@@ -57,7 +57,7 @@ def Loads (_Data: str, **_Options) -> dict:
 
         Splitted = FixedLine.split ('::')
 
-        if Splitted[0].startswith ("'") and Splitted[0].endswith ("'") or Splitted[0].startswith ('"') and Splitted[0].endswith ('"'):
+        if Splitted[0].startswith ('\'') and Splitted[0].endswith ('\'') or Splitted[0].startswith ('"') and Splitted[0].endswith ('"'):
             Key = Splitted[0][1 : len (Splitted[0]) - 1]
             Value = Splitted[1].split ('@')[0]
 
@@ -84,7 +84,7 @@ def Loads (_Data: str, **_Options) -> dict:
                     Apply = ToApply.lower ().split ('.')
                     if Apply[0] in Keywords:
                         if Apply[1] in OptionWords[Apply[0]]:
-                            Value = f"{OptionWords[Apply[0]][Apply[1]] (Value)}"
+                            Value = f'{OptionWords[Apply[0]][Apply[1]] (Value)}'
                             ToApply = ''
 
                 Value = CheckValue (Value, CurrentSectionData)
@@ -93,6 +93,7 @@ def Loads (_Data: str, **_Options) -> dict:
 
     if SectionIndex == -1:
         print ('No section detected! (\'[]\')')
+
         return
 
     elif SectionIndex == 0:
@@ -100,4 +101,5 @@ def Loads (_Data: str, **_Options) -> dict:
 
     else:
         Content.append (Sections)
+        
         return Content[0]
